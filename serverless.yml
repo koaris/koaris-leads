@@ -12,8 +12,20 @@ plugins:
 
 functions:
   webhookHandler:
-    handler: src/handler.handler
+    handler: dist/handler.handler
     events:
       - http:
           path: webhook
           method: post
+
+package:
+  include:
+    - dist/**
+    - node_modules/**
+    - .env
+  exclude:
+    - src/**
+    - test/**
+    - README.md
+    - .gitignore
+    - serverless.yml
