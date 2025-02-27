@@ -5,8 +5,6 @@ import { mailchimpConfig } from './lib/mailchimp';
 import nodemailer from "nodemailer";
 import { User, validateContactForm } from './utils';
 
-
-
 export const handler = async (
   event: APIGatewayEvent,
   context: Context

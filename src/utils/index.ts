@@ -1,6 +1,6 @@
 export type User = {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
   phone: string;
   souce?: string;
@@ -17,11 +17,6 @@ export function validateContactForm(data: unknown): { valid: boolean; errors?: s
 
   // Validate Name
   if (!firstName || typeof firstName !== "string" || firstName.trim().length < 2) {
-    errors.push("Name must be at least 2 characters long.");
-  }
-
-  // Validate Name
-  if (!lastName || typeof lastName !== "string" || lastName.trim().length < 2) {
     errors.push("Name must be at least 2 characters long.");
   }
 
