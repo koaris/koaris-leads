@@ -1,8 +1,5 @@
 import crypto from 'crypto';
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
-import dotenv from 'dotenv';
-
-dotenv.config()
 
 export const handler = async (
   event: APIGatewayEvent,
