@@ -2,15 +2,10 @@ import crypto from 'crypto';
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
 import mailchimp from "@mailchimp/mailchimp_marketing";
 import { mailchimpConfig } from './lib/mailchimp';
+import nodemailer from "nodemailer";
+import { User, validateContactForm } from './utils';
 
-type User = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  souce?: string;
-  country?: string;
-}
+
 
 export const handler = async (
   event: APIGatewayEvent,
@@ -40,12 +35,44 @@ export const handler = async (
     switch (eventType) {
       case 'touch': {
         const optin: string = payload.optin;
+        const message: string = payload.message;
+        const user: User = payload.user;
+
+        if (!validateContactForm(user).valid) {
+          return {
+            statusCode: 400,
+            body: JSON.stringify({ error: "Error in validation" })
+          };
+        }
+
+        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.EMAIL_RECEIVER) {
+          return {
+            statusCode: 500,
+            body: JSON.stringify({ error: "Google access error" })
+          };
+        }
 
         if (optin) {
-          const user: User = payload.user;
           const response = await insertContactMailChimp(user)
           console.log(`Inserted to mailchimp`);
         }
+
+        const transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
+
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_RECEIVER,
+          subject: `Koaris LP - New Contact Message from ${user.firstName}`,
+          text: `From: ${user.firstName} (${user.email} - ${user.phone})\n\nMessage:\n${message}`,
+        };
+
+        await transporter.sendMail(mailOptions);
 
         break;
       }

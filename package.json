@@ -17,12 +17,14 @@
     "aws-lambda": "^1.0.7",
     "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
+    "nodemailer": "^6.10.0",
     "serverless": "^4.7.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.147",
     "@types/mailchimp__mailchimp_marketing": "^3.0.21",
     "@types/node": "^22.13.5",
+    "@types/nodemailer": "^6.4.17",
     "serverless-offline": "^14.4.0"
   }
 }

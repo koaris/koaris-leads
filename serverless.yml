@@ -6,6 +6,9 @@ provider:
   stage: v1
   environment:
     WEBHOOK_SECRET: ${env:WEBHOOK_SECRET}
+    EMAIL_USER: ${env:EMAIL_USER}
+    EMAIL_PASS: ${env:EMAIL_PASS}
+    EMAIL_RECEIVER: ${env:EMAIL_RECEIVER}
 
 functions:
   webhookHandler:
