@@ -1,20 +1,26 @@
 {
   "name": "koaris-leads",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "An AWS Lambda function to handle webhooks with HMAC verification.",
+  "main": "dist/handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "tsc && node dist/handler.js",
+    "test": "jest",
+    "key": "node utils/key-generator.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Guilherme Salviano",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@types/aws-lambda": "^8.10.147",
+    "aws-lambda": "^1.0.7",
     "crypto": "^1.0.1",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "serverless": "^4.7.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.5"
+    "@types/aws-lambda": "^8.10.147",
+    "@types/node": "^22.13.5",
+    "serverless-offline": "^14.4.0"
   }
 }

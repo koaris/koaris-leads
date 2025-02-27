@@ -1,0 +1,18 @@
+service: webhook-service
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    WEBHOOK_SECRET: test
+
+plugins:
+  - serverless-offline
+
+functions:
+  webhookHandler:
+    handler: src/handler.handler
+    events:
+      - http:
+          path: webhook
+          method: post
