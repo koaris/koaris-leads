@@ -1,6 +1,8 @@
 # Introduction
 A Webhook application using AWS Lambda to forward contact requests to Google and Mailchimp!
-## Deploy
+## Development
+The branch for new implementations is `develop`. Merge changes into `main` when ready, and deployment will happen automatically when merging into the `deploy` branch.
+## Deploy Commands
 To deploy serverless
 ```bash
 serverless deploy
