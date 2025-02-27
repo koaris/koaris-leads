@@ -9,6 +9,8 @@ provider:
     EMAIL_USER: ${env:EMAIL_USER}
     EMAIL_PASS: ${env:EMAIL_PASS}
     EMAIL_RECEIVER: ${env:EMAIL_RECEIVER}
+    AUDIENCE_ID: ${env:AUDIENCE_ID}
+    MAILCHIMP_SECRET: ${env:MAILCHIMP_SECRET}
 
 functions:
   webhookHandler:

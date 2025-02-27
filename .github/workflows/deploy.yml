@@ -35,4 +35,6 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
           EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+          AUDIENCE_ID: ${{ secrets.AUDIENCE_ID }}
+          MAILCHIMP_SECRET: ${{ secrets.MAILCHIMP_SECRET }}
         run: serverless deploy
