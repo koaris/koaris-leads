@@ -1,6 +1,14 @@
 import crypto from 'crypto';
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
 
+type User = {
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Phone: string;
+  Source: string;
+}
+
 export const handler = async (
   event: APIGatewayEvent,
   context: Context
@@ -27,17 +35,11 @@ export const handler = async (
     const eventType: string = payload.type;
 
     switch (eventType) {
-      case 'payment.success': {
-        const orderId: string = payload.orderId;
-        console.log(`Processing successful payment for order ${orderId}`);
-        // Business logic here
-        break;
-      }
+      case 'touch': {
+        const optin: string = payload.optin;
+        const user: string = payload.user;
 
-      case 'payment.failed': {
-        const orderId: string = payload.orderId;
-        console.log(`Processing failed payment for order ${orderId}`);
-        // Business logic here
+        console.log(`Processing optin ${optin} and user ${user}`);
         break;
       }
 
@@ -90,3 +92,7 @@ const verifySignature = (event: APIGatewayEvent, webhookSecret: string): boolean
     return false;
   }
 };
+
+async function insertContactMailChimp(user: User) {
+  
+}

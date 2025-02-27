@@ -7,9 +7,6 @@ provider:
   environment:
     WEBHOOK_SECRET: ${env:WEBHOOK_SECRET}
 
-plugins:
-  - serverless-offline
-
 functions:
   webhookHandler:
     handler: dist/handler.handler

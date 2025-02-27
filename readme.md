@@ -18,7 +18,7 @@ serverless remove
 ## Test
 Run the new server
 ```bash
-serverless offline
+serverless offline start --config serverless-local.yml
 ```
 Run the new key
 ```bash
@@ -29,5 +29,9 @@ Send a Test Event
 curl -X POST http://localhost:3000/dev/webhook \
      -H "x-webhook-signature: aaaaa" \
      -H "Content-Type: application/json" \
-     -d '{"type": "payment.success", "orderId": "12345"}'
+     -d '{"type": "touch", "optin": true, "user": {"FirstName": "Joe", "LastName": "Doe", "Phone": "11912345678", "Email": "joe.doe@test.com", "Source": "Koaris LP - Touchs"}}'
 ```
+
+### Possible types
+- type: touch - Check optin, if yes integrate with mailchimp
+- type: lead - Just integrate with mailchimp
