@@ -1,13 +1,15 @@
 import crypto from 'crypto';
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
-import { mailchimpAPI } from "./lib/mailchimp"
+import mailchimp from "@mailchimp/mailchimp_marketing";
+import { mailchimpConfig } from './lib/mailchimp';
 
 type User = {
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  Phone: string;
-  Source: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  souce?: string;
+  country?: string;
 }
 
 export const handler = async (
@@ -38,9 +40,13 @@ export const handler = async (
     switch (eventType) {
       case 'touch': {
         const optin: string = payload.optin;
-        const user: string = payload.user;
 
-        console.log(`Processing optin ${optin} and user ${user}`);
+        if (optin) {
+          const user: User = payload.user;
+          const response = await insertContactMailChimp(user)
+          console.log(`Inserted to mailchimp`);
+        }
+
         break;
       }
 
@@ -95,19 +101,21 @@ const verifySignature = (event: APIGatewayEvent, webhookSecret: string): boolean
 };
 
 async function insertContactMailChimp(user: User) {
-  const audienceId = process.env.AUDIENCE_ID
+  const audienceId = process.env.AUDIENCE_ID || '';
 
-  const response = await mailchimpAPI.post(`/lists/${audienceId}/members`, {
-    email_address: "guilherme.salviano12@outlook.com",
+  mailchimp.setConfig(mailchimpConfig);
+
+  const response = await mailchimp.lists.addListMember(audienceId, {
+    email_address: user.email,
     status: "subscribed",
     merge_fields: {
-      FNAME: "joe",
-      LNAME: "doe",
+      FNAME: user.firstName,
+      LNAME: user.lastName,
+      PHONE: user.phone,
+      SOURCE: user.souce,
+      COUNTRY: user.country,
     },
-    source: "Koaris LP - Touchs"
   });
 
-  console.log(
-    `Successfully created an audience. The audience id is ${response.id}.`
-  );
+  return response
 }
