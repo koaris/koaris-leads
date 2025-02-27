@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { APIGatewayEvent, Context, APIGatewayProxyResult } from 'aws-lambda';
+import { mailchimpAPI } from "./lib/mailchimp"
 
 type User = {
   FirstName: string;
@@ -94,5 +95,19 @@ const verifySignature = (event: APIGatewayEvent, webhookSecret: string): boolean
 };
 
 async function insertContactMailChimp(user: User) {
-  
+  const audienceId = process.env.AUDIENCE_ID
+
+  const response = await mailchimpAPI.post(`/lists/${audienceId}/members`, {
+    email_address: "guilherme.salviano12@outlook.com",
+    status: "subscribed",
+    merge_fields: {
+      FNAME: "joe",
+      LNAME: "doe",
+    },
+    source: "Koaris LP - Touchs"
+  });
+
+  console.log(
+    `Successfully created an audience. The audience id is ${response.id}.`
+  );
 }

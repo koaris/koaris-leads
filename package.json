@@ -13,10 +13,10 @@
   "author": "Guilherme Salviano",
   "license": "ISC",
   "dependencies": {
-    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "aws-lambda": "^1.0.7",
     "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
+    "mailchimp-api-v3": "^1.15.0",
     "serverless": "^4.7.0"
   },
   "devDependencies": {
