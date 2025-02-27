@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc && node dist/handler.js",
     "test": "jest",
-    "key": "node utils/key-generator.js"
+    "key": "node utils/key-generator.mjs"
   },
   "keywords": [],
   "author": "Guilherme Salviano",
