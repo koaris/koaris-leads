@@ -29,9 +29,12 @@ package:
     - src/**
     - utils/**
     - .github/**
+    - .docs/**
+    - .env.example
     - tsconfig.json
     - readme.md
     - test/**
     - README.md
     - .gitignore
     - serverless.yml
+    - serverless-local.yml
