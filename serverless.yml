@@ -3,6 +3,7 @@ service: webhook-service
 provider:
   name: aws
   runtime: nodejs20.x
+  stage: v1
   environment:
     WEBHOOK_SECRET: ${env:WEBHOOK_SECRET}
 
