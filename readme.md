@@ -1,5 +1,18 @@
 # Introduction
-A Webhook application using AWS Lambda to forward contact requests to Google and Mailchimp! 
+A Webhook application using AWS Lambda to forward contact requests to Google and Mailchimp!
+## Deploy
+To deploy serverless
+```bash
+serverless deploy
+```
+To see serverless informations
+```bash
+serverless info
+```
+To undeploy
+```bash
+serverless remove
+```
 ## Test
 Run the new server
 ```bash
