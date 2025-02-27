@@ -25,6 +25,10 @@ package:
     - .env
   exclude:
     - src/**
+    - utils/**
+    - .github/**
+    - tsconfig.json
+    - readme.md
     - test/**
     - README.md
     - .gitignore
