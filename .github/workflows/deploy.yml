@@ -1,9 +1,7 @@
 name: Deploy Lambda Function
 
 on:
-  push:
-    branches:
-      - deploy
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -20,11 +18,14 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install Serverless Framework
-        run: npm install -g serverless@3
-
       - name: Install dependencies
         run: npm install
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless
 
       - name: Deploy to AWS Lambda
         env:
